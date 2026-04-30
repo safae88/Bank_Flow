@@ -2,8 +2,9 @@
 
 ## 📌 Description
 
-**BankFlow** est une application web développée avec **Spring Boot** permettant de gérer des comptes bancaires et des agents.
-Elle implémente les opérations CRUD (Create, Read, Update, Delete) avec une interface web basée sur des pages HTML.
+BankFlow est une application web développée avec Spring Boot permettant de gérer des comptes bancaires et des agents.\ Elle implémente les opérations CRUD (Create, Read, Update, Delete) avec une interface web basée sur des pages HTML.
+
+L’application intègre également une intelligence artificielle locale via Ollama en utilisant le modèle Llama 3, permettant d’ajouter des fonctionnalités intelligentes comme l’assistance utilisateur ou la génération de contenu.
 
 ---
 
