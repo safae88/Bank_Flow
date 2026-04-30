@@ -1,128 +1,130 @@
- # BankFlow - Banking Account Management System
+ # 🏦 BankFlow - Application de gestion bancaire
 
-BankFlow is a web application developed with Spring Boot MVC for managing bank accounts.  
-The application allows users to create, update, delete, and manage bank accounts through a simple and modern web interface.
+## 📌 Description
 
----
-
-# Features
-
-- Create a bank account
-- View all bank accounts
-- Update account information
-- Delete an account
-- Deposit money
-- Withdraw money
-- View account details
-- Responsive interface using Bootstrap 5
+**BankFlow** est une application web développée avec **Spring Boot** permettant de gérer des comptes bancaires et des agents.
+Elle implémente les opérations CRUD (Create, Read, Update, Delete) avec une interface web basée sur des pages HTML.
 
 ---
 
-# Technologies Used
+## ⚙️ Technologies utilisées
 
-- Java 17
-- Spring Boot 3.2.5
-- Spring MVC
-- Thymeleaf
-- Bootstrap 5
-- Maven
-
----
-
-# Project Architecture
-
-The project follows the MVC architecture:
-
-- **Model** → `BankAccount.java`
-- **Controller** → `BankAccountController.java`
-- **Service** → `BankAccountService.java`
-- **View** → Thymeleaf HTML templates
+*  Java
+*  Spring Boot
+*  Spring MVC
+*  Maven
+*  Thymeleaf (HTML templates)
 
 ---
 
-# Project Structure
+## 📁 Structure du projet
 
-```bash
-src/main/
+```
+bank-crud/
 │
-├── java/com/example/bank/
-│   ├── controller/
-│   │   └── BankAccountController.java
-│   │
-│   ├── model/
-│   │   └── BankAccount.java
-│   │
-│   ├── service/
-│   │   └── BankAccountService.java
-│   │
-│   └── BankApplication.java
+├── src/
+│   └── main/
+│       ├── java/com/example/bank/
+│       │   ├── controller/
+│       │   │   ├── AgentController.java
+│       │   │   ├── AgenticController.java
+│       │   │   └── BankAccountController.java
+│       │   │
+│       │   ├── model/
+│       │   │   └── BankAccount.java
+│       │   │
+│       │   ├── service/
+│       │   │
+│       │   └── BankApplication.java
+│       │
+│       └── resources/
+│           ├── templates/
+│           │   ├── agent.html
+│           │   ├── form.html
+│           │   ├── list.html
+│           │   └── view.html
+│           │
+│           ├── static/
+│           └── application.properties
 │
-└── resources/
-    ├── templates/
-    │   ├── list.html
-    │   ├── form.html
-    │   └── view.html
-    │
-    └── application.properties
+├── .mvn/
+├── .settings/
+└── pom.xml
 ```
 
 ---
 
-# How to Run the Project
+## 🚀 Fonctionnalités
 
-## 1. Clone the repository
+*  Gestion des comptes bancaires
+*  Gestion des agents
+*  Ajout / modification / suppression (CRUD)
+*  Affichage via interface web
+*  Architecture MVC
 
-```bash
-git clone https://github.com/safae88/Bank_Flow.git
+---
+
+## ▶️ Lancer le projet
+
+### 1. Cloner le projet
+
+```
+git clone https://github.com/ton-repo/bankflow.git
+cd bank-crud
 ```
 
-## 2. Open the project folder
+### 2. Exécuter l'application
 
-```bash
-cd Bank_Flow
 ```
-
-## 3. Run the application
-
-```bash
 mvn spring-boot:run
 ```
 
-## 4. Open in browser
+Ou lancer directement :
 
-```bash
-http://localhost:8080/accounts
+```
+BankApplication.java
 ```
 
 ---
 
-# Main Functionalities
+## 🌐 Accès
 
-| Method | URL | Description |
-|---|---|---|
-| GET | `/accounts` | Display all accounts |
-| GET | `/accounts/new` | Create account form |
-| POST | `/accounts/save` | Save account |
-| GET | `/accounts/{id}` | View account details |
-| GET | `/accounts/edit/{id}` | Edit account |
-| GET | `/accounts/delete/{id}` | Delete account |
-| POST | `/accounts/deposit` | Deposit money |
-| POST | `/accounts/withdraw` | Withdraw money |
+Après démarrage :
+
+```
+http://localhost:8081
+```
 
 ---
 
-# Screenshots
+## 📄 Pages principales
 
-Add your project screenshots here.
-
----
-
-# Author
-
-**Safae Bouchouicha**
+* `/list` → Liste des comptes
+* `/form` → Ajouter / modifier
+* `/view` → Détails d’un compte
+* `/agent` → Gestion des agents
 
 ---
 
-# Academic Project
+## 📚 Concepts utilisés
 
-This project was developed as part of a university project using Spring Boot MVC.
+* Architecture MVC
+* Spring Boot
+* Injection de dépendances
+* Controllers REST
+* Templates Thymeleaf
+
+---
+
+## 👩‍💻 Auteur
+
+**Safae Bouchouicha | ****Fouzia Ait Abdenbi**
+
+---
+
+## ✨ Améliorations possibles
+
+* Ajouter Spring Security
+*  Utiliser MySQL
+*  Ajouter Bootstrap
+*  Recherche et pagination
