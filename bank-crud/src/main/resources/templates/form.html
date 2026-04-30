@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire compte</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg: #f2f6ff;
+            --card: rgba(255, 255, 255, 0.8);
+            --text: #0f172a;
+            --muted: #64748b;
+            --primary: #1d4ed8;
+            --primary-hover: #1e40af;
+            --border: #dbe6ff;
+            --shadow: 0 12px 30px rgba(37, 99, 235, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(30, 64, 175, 0.14) 0%, rgba(30, 64, 175, 0) 35%),
+                radial-gradient(circle at 90% 90%, rgba(14, 165, 233, 0.16) 0%, rgba(14, 165, 233, 0) 35%),
+                linear-gradient(180deg, #f8fbff 0%, #f1f5ff 100%);
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: -120px;
+            left: -90px;
+            background: rgba(59, 130, 246, 0.25);
+        }
+
+        body::after {
+            bottom: -120px;
+            right: -80px;
+            background: rgba(14, 165, 233, 0.22);
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 48px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            margin: 0 0 6px;
+            font-size: 28px;
+            letter-spacing: 0.2px;
+        }
+
+        .subtitle {
+            margin: 0 0 24px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #eaf1ff;
+            border: 1px solid #cfe0ff;
+            color: #1e3a8a;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            padding: 12px 12px;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background: #f8fbff;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.12);
+        }
+
+        .actions {
+            margin-top: 22px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #1e3a8a);
+            color: #fff;
+            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.28);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(30, 64, 175, 0.32);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body>
+<main class="container">
+    <section class="card">
+        <span class="badge">BankFlow</span>
+        <h1 th:text="${account.id == null ? 'Nouveau compte' : 'Modifier le compte'}">Formulaire</h1>
+        <p class="subtitle">Renseignez les informations du compte bancaire</p>
+
+        <form th:action="@{/accounts/save}" th:object="${account}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="field">
+                <label for="accountHolder">Titulaire</label>
+                <input id="accountHolder" type="text" th:field="*{accountHolder}" placeholder="Ex: Ahmed Benali" required>
+            </div>
+
+            <div class="field">
+                <label for="accountNumber">Numero de compte</label>
+                <input id="accountNumber" type="text" th:field="*{accountNumber}" placeholder="Ex: MA76 1234 5678 9000" required>
+            </div>
+
+            <div class="field">
+                <label for="balance">Solde initial</label>
+                <input id="balance" type="number" step="0.01" min="0" th:field="*{balance}" placeholder="0.00" required>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-primary" type="submit">Enregistrer</button>
+                <a class="btn btn-secondary" th:href="@{/accounts}">Annuler</a>
+            </div>
+        </form>
+    </section>
+</main>
+
+</body>
+</html>

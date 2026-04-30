@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des comptes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg: #f2f6ff;
+            --card: rgba(255, 255, 255, 0.78);
+            --primary: #1d4ed8;
+            --primary-hover: #1e40af;
+            --text: #0f172a;
+            --muted: #64748b;
+            --border: #dbe6ff;
+            --danger: #dc2626;
+            --danger-hover: #b91c1c;
+            --shadow: 0 12px 30px rgba(37, 99, 235, 0.15);
+            --ring: 0 0 0 3px rgba(29, 78, 216, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background:
+                radial-gradient(circle at 12% 8%, rgba(30, 64, 175, 0.13) 0%, rgba(30, 64, 175, 0) 32%),
+                radial-gradient(circle at 88% 88%, rgba(14, 165, 233, 0.14) 0%, rgba(14, 165, 233, 0) 35%),
+                linear-gradient(180deg, #f8fbff 0%, #f1f5ff 100%);
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: -120px;
+            left: -90px;
+            background: rgba(59, 130, 246, 0.24);
+        }
+
+        body::after {
+            bottom: -120px;
+            right: -80px;
+            background: rgba(14, 165, 233, 0.22);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .toolbar {
+            margin-bottom: 18px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.65);
+            padding: 8px 12px;
+            color: #1e3a8a;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .title {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .subtitle {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            border: 0;
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #1e3a8a);
+            color: #fff;
+            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.28);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(30, 64, 175, 0.32);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #0f172a;
+            box-shadow: none;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead th {
+            text-align: left;
+            padding: 14px;
+            background: #eef4ff;
+            border-bottom: 1px solid var(--border);
+            color: #1e3a8a;
+            font-size: 12px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        tbody td {
+            padding: 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .amount {
+            font-weight: 700;
+            color: #0b7a3e;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .link {
+            text-decoration: none;
+            font-weight: 600;
+            color: #1d4ed8;
+            padding: 5px 8px;
+            border-radius: 8px;
+            background: #eff6ff;
+        }
+
+        .link:hover {
+            box-shadow: var(--ring);
+        }
+
+        .link-danger {
+            color: var(--danger);
+        }
+
+        .link-danger:hover {
+            color: var(--danger-hover);
+        }
+
+        @media (max-width: 820px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tbody tr {
+                border-bottom: 1px solid var(--border);
+                padding: 10px 14px;
+            }
+
+            tbody td {
+                border: 0;
+                padding: 6px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<main class="container">
+    <div class="header">
+        <div>
+            <h1 class="title">Comptes bancaires</h1>
+            <p class="subtitle">Gestion centralisee des comptes et des operations</p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn-secondary" th:href="@{/agent}">Agent bancaire</a>
+            <a class="btn btn-primary" th:href="@{/accounts/new}">+ Creer un compte</a>
+        </div>
+    </div>
+    <div class="toolbar">
+        <span class="chip">Tableau de bord</span>
+        <span class="chip" th:text="'Total comptes: ' + ${#lists.size(accounts)}">Total comptes: 0</span>
+    </div>
+
+    <section class="card">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titulaire</th>
+                <th>Numero de compte</th>
+                <th>Solde</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="account : ${accounts}">
+                <td th:text="${account.id}">1</td>
+                <td th:text="${account.accountHolder}">Nom Prenom</td>
+                <td th:text="${account.accountNumber}">ACC0001</td>
+                <td class="amount" th:text="${#numbers.formatDecimal(account.balance, 1, 2)} + ' MAD'">0.00 MAD</td>
+                <td>
+                    <div class="actions">
+                        <a class="link" th:href="@{/accounts/{id}(id=${account.id})}">Voir</a>
+                        <a class="link" th:href="@{/accounts/edit/{id}(id=${account.id})}">Modifier</a>
+                        <a class="link link-danger"
+                           th:href="@{/accounts/delete/{id}(id=${account.id})}"
+                           onclick="return confirm('Supprimer ce compte ?');">Supprimer</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+</body>
+</html>
