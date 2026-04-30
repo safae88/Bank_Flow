@@ -118,7 +118,7 @@ http://localhost:8081
 
 ## 👩‍💻 Auteur
 
-**Safae Bouchouicha | ****Fouzia Ait Abdenbi**
+**Safae Bouchouicha** **| ****Fouzia Ait Abdenbi**
 
 ---
 
