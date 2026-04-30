@@ -14,6 +14,8 @@ Elle implémente les opérations CRUD (Create, Read, Update, Delete) avec une in
 *  Spring MVC
 *  Maven
 *  Thymeleaf (HTML templates)
+* Ollama (LLM local)
+* Llama 3 (modèle d’intelligence artificielle)
 
 ---
 
