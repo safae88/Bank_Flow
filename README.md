@@ -1,5 +1,10 @@
  # 🏦 BankFlow - Application de gestion bancaire
 
+<h2>🎥 Demo Video</h2>
+
+https://github.com/user-attachments/assets/bf596504-4d4a-4166-9225-0b72b8281148
+
+
 ## 📌 Description
 
 BankFlow est une application web développée avec Spring Boot permettant de gérer des comptes bancaires et des agents.\ Elle implémente les opérations CRUD (Create, Read, Update, Delete) avec une interface web basée sur des pages HTML.
@@ -121,9 +126,7 @@ http://localhost:8081
 
 ## 👩‍💻 Auteur
 
-**Safae Bouchouicha** **| ****Fouzia Ait Abdenbi**
-
-<h2>🎥 Demo Video</h2>
+**Safae Bouchouicha** | **Fouzia Ait Abdenbi**
 
 <video src="FlowBank.mp4" controls width="700"></video>
 ---
