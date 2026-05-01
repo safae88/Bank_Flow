@@ -123,6 +123,9 @@ http://localhost:8081
 
 **Safae Bouchouicha** **| ****Fouzia Ait Abdenbi**
 
+<h2>🎥 Demo Video</h2>
+
+<video src="FlowBank.mp4" controls width="700"></video>
 ---
 
 ## ✨ Améliorations possibles
