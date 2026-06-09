@@ -77,7 +77,7 @@ bank-crud/
 ### 1. Cloner le projet
 
 ```
-git clone https://github.com/ton-repo/bankflow.git
+git clone https://github.com/safae88/Bank_Flow.git
 cd bank-crud
 ```
 
@@ -133,7 +133,7 @@ http://localhost:8081
 
 ## ✨ Améliorations possibles
 
-* Ajouter Spring Security
+*  Ajouter Spring Security
 *  Utiliser MySQL
 *  Ajouter Bootstrap
 *  Recherche et pagination
